@@ -4,7 +4,7 @@ game_map={
     'Entrance':{
     'Discription':'Stand the grand Entrance of the castle. The door is open',
     'items':[],
-    'exits':{'north':'grandhall'},#if we exit the entrance the move north to ground hall
+    'exits':{'north':'Grand_Hall'},#if we exit the entrance the move north to ground hall
     'puzzel':None,
     'Score':[0]
     
@@ -12,7 +12,7 @@ game_map={
     'Grand_Hall':{
         'Discription':'A vast room with high ceilings and space.There is a locked door to the North',
         'items':[],
-        'exits':{'west':'Entrance','east':'Library','south':'basement'},
+        'exits':{'west':'Entrance','east':'Library','south':'Basement'},
         'puzzel':'Find a key. The door is locked on north side',
         'Score':[]
     },
@@ -34,11 +34,7 @@ game_map={
     }
     
 }
-#player starts with  entrance
-player={
-    'current_room':['entrance'],
-    'Inventory':[]
-}
+
     
 def map_game():
     for room,discrip in game_map.items():
