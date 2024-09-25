@@ -3,32 +3,32 @@
 game_map={
     'Entrance':{
     'Discription':'Stand the grand Entrance of the castle. The door is open',
-    'items':[],
+    'items':['key','painting','hammer','table'],
     'exits':{'north':'Grand_Hall'},#if we exit the entrance the move north to ground hall
     'puzzel':None,
-    'Score':[0]
+ 
     
     },
     'Grand_Hall':{
         'Discription':'A vast room with high ceilings and space.There is a locked door to the North',
-        'items':[],
+        'items':['key','sofa','roundtable','shoes'],
         'exits':{'west':'Entrance','east':'Library','south':'Basement'},
-        'puzzel':'Find a key. The door is locked on north side',
-        'Score':[]
+        'puzzel':'locked door',
+       
     },
     'Library':{
         'Discription':'library is filled with books. A key lies on the table',
-        'items':['key'] ,#we set key in default
-        'exits':{'west:''Grand_hall'},
+        'items':['key','Books','chairs','candleholder'] ,#we set key in default
+        'exits':{'west:''Grand_hall','south:' 'Entrance'},
         'puzzel':None,
-        'Score':[]
+        
     },
     'Basement':{
         'Discription':'A cold dark basement . Final door .Also this is escape door',
-        'items':[],
-        'exits':{'south': 'Entrance'},
-        'puzzel':'solve the puzzel to unlock the escape door',
-        'Score':[]
+        'items':['Rusted Key', 'Old Crate', 'Broken Lantern', 'bikes', 'Cobwebs'],
+        'exits':{'south': 'Entrance','east':'Entrance'},
+        'puzzel':'riddle',
+        
         
         
     }
@@ -43,7 +43,7 @@ def map_game():
         print(f' Items: {discrip['items'] if discrip['items'] else 'None'}')
         print(f'  Exits:{discrip['exits']}' )
         print(f'  Puzzle: {discrip['puzzel'] if discrip['puzzel'] else 'None'}')
-        print(f'  Score: {discrip['Score']}')
+     
     
 
 map_game()
