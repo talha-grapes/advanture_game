@@ -9,29 +9,27 @@ def direction():
         print(f'Description of {current_room}: {room["Discription"]}')
         direction_input=input('enter the direction (e.g:go north) ): ' )
         if direction_input=='look':
-                print(f'Description of {current_room}: {room["Discription"]}')
-                continue 
-        if direction_input =='exit':
+            print(f'Description of {current_room}: {room["Discription"]}')
+        elif direction_input =='exit':
             print('Exit the game.GoodBye!')
             break
-        if direction_input.startswith('go'):
+        elif direction_input.startswith('go'):
             direction_input = direction_input[3:]                  
             if direction_input in room['exits']:
-                    next_room=room['exits'][direction_input]
-                    current_room=next_room
-                    print(f'You have moved to: {current_room}')
-                    print(f'Description of {current_room}: {room["Discription"]}')
-                    player['score']+=10
-                    print(f'player score is {player["score"]}')
+                next_room=room['exits'][direction_input]
+                current_room=next_room
+                print(f'You have moved to: {current_room}')
+                print(f'Description of {current_room}: {room["Discription"]}')
+                player['score']+=10
+                print(f'player score is {player["score"]}')
              # Ask if the player wants to manage inventory after movement
-                    manage_inventory = input("Do you want to manage your inventory? (yes/no): ").lower()
-                    if manage_inventory == 'yes':
-                       inventory_player()
-                 
-                    else:
-                     print('invalid direction!')
-            else:
-              print('invalid comand')
+                manage_inventory = input("Do you want to manage your inventory? (yes/no): ").lower()
+                if manage_inventory == 'yes':
+                    inventory_player()
+                else:
+                    print('invalid direction!')
+        else:
+            print('invalid comand')
         
     show_inventory() 
     
@@ -42,11 +40,10 @@ def direction():
   
   
 player={
-    'name': 'Player ',  # You can change this to allow players to set their name.
-    'inventory': [],     # Inventory starts empty but items will be added as they are collected.
-    'health': 100,       # Default health points for the player.
+    'name': 'Player ',   
+    'inventory': [],           
     'score': 0,
-    'Dropped_inventory':[]
+    'Dropped_inventory':[],
     
   }              
 

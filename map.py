@@ -26,7 +26,7 @@ game_map={
     'Basement':{
         'Discription':'A cold dark basement . Final door .Also this is escape door',
         'items':['Rusted Key', 'Old Crate', 'Broken Lantern', 'bikes', 'Cobwebs'],
-        'exits':{'south': 'Entrance','east':'Entrance'},
+        'exits':{'south': 'Entrance','east':'Grand_Hall'},
         'puzzel':'riddle',
         
         
@@ -43,7 +43,4 @@ def map_game():
         print(f' Items: {discrip['items'] if discrip['items'] else 'None'}')
         print(f'  Exits:{discrip['exits']}' )
         print(f'  Puzzle: {discrip['puzzel'] if discrip['puzzel'] else 'None'}')
-     
-    
-
 map_game()
