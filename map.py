@@ -1,38 +1,30 @@
 # Make map that represent rooms,exits,items,puzzels and discription
 # we used dictionary to nake the map
-game_map={
-    'Entrance':{
-    'Discription':'Stand the grand Entrance of the castle. The door is open',
-    'items':['key','painting','hammer','table'],
-    'exits':{'north':'Grand_Hall'},#if we exit the entrance the move north to ground hall
-    'puzzel':None,
- 
-    
+game_map = {
+    'Entrance': {
+        'Discription': 'You stand at the grand entrance of the castle. The door is open.',
+        'items': ['key', 'painting', 'hammer', 'table'],
+        'exits': {'north': 'Grand_Hall'},  # if we exit the entrance, we move north to Grand Hall
+        'puzzel': None,
     },
-    'Grand_Hall':{
-        'Discription':'A vast room with high ceilings and space.There is a locked door to the North',
-        'items':['key','sofa','roundtable','shoes'],
-        'exits':{'west':'Entrance','east':'Library','south':'Basement'},
-        'puzzel':'locked door',
-       
+    'Grand_Hall': {
+        'Discription': 'A vast room with high ceilings. There is a locked door to the North.',
+        'items': ['key', 'sofa', 'roundtable', 'shoes'],
+        'exits': {'west': 'Entrance', 'east': 'Library', 'south': 'Basement'},
+        'puzzel': 'locked door',
     },
-    'Library':{
-        'Discription':'library is filled with books. A key lies on the table',
-        'items':['key','Books','chairs','candleholder'] ,#we set key in default
-        'exits':{'west:''Grand_hall','south:' 'Entrance'},
-        'puzzel':None,
-        
+    'Library': {
+        'Discription': 'The library is filled with books. A key lies on the table.',
+        'items': ['key', 'Books', 'chairs', 'candleholder'],
+        'exits': {'west': 'Grand_Hall', 'south': 'Entrance'},
+        'puzzel': None,
     },
-    'Basement':{
-        'Discription':'A cold dark basement . Final door .Also this is escape door',
-        'items':['Rusted Key', 'Old Crate', 'Broken Lantern', 'bikes', 'Cobwebs'],
-        'exits':{'south': 'Entrance','east':'Grand_Hall'},
-        'puzzel':'riddle',
-        
-        
-        
+    'Basement': {
+        'Discription': 'A cold, dark basement. The final door is here, which is the escape door.',
+        'items': ['Rusted Key', 'Old Crate', 'Broken Lantern', 'bikes', 'Cobwebs'],
+        'exits': {'south': 'Entrance', 'east': 'Grand_Hall'},
+        'puzzel': 'riddle',
     }
-    
 }
 
     

@@ -1,4 +1,8 @@
 from map import game_map
+import puzzel
+
+import json
+
 current_room='Entrance'
 
 def direction():
@@ -13,15 +17,29 @@ def direction():
         elif direction_input =='exit':
             print('Exit the game.GoodBye!')
             break
+        if direction_input=='examine':
+            puzzel.examine()
         elif direction_input.startswith('go'):
             direction_input = direction_input[3:]                  
             if direction_input in room['exits']:
                 next_room=room['exits'][direction_input]
-                current_room=next_room
-                print(f'You have moved to: {current_room}')
-                print(f'Description of {current_room}: {room["Discription"]}')
-                player['score']+=10
-                print(f'player score is {player["score"]}')
+                puzzel_solved=False
+                
+                print('solve the puzzel then move')
+                if game_map[next_room].get('puzzel'):
+                    if game_map[next_room]['puzzel']=='locked door':
+                        print(f'the door to {next_room} is locked . Solve the Puzzel')
+                        puzzel_solved=puzzel.solve_locked(next_room)
+                    if game_map[next_room]['puzzel']=='riddle':
+                         print(f'the door to {next_room} is locked . Solve the Puzzel')
+                         puzzel_solved=puzzel.solve_riddle(next_room)
+                        
+                if puzzel_solved:
+                    current_room=next_room
+                    print(f'You have moved to: {current_room}')
+                    print(f'Description of {current_room}: {room["Discription"]}')
+                    player['score']+=10
+                    print(f'player score is {player["score"]}')
              # Ask if the player wants to manage inventory after movement
                 manage_inventory = input("Do you want to manage your inventory? (yes/no): ").lower()
                 if manage_inventory == 'yes':
@@ -69,12 +87,9 @@ def inventory_player():
                 if item_choice==0 or item_choice>len(items):
                     print('You chose to stop taking items.')
                     break
-                if 1 <= item_choice <= len(items):
-                    picked_item=items.pop(item_choice-1)
-                    player['inventory'].append(picked_item)
-                    print(f'You have taken: {picked_item}')
-                else:
-                    ('Invalid choice')
+                picked_item=items.pop(item_choice-1)
+                player['inventory'].append(picked_item)
+                print(f'You have taken: {picked_item}')
             except ValueError:
                     print("Please enter a valid number.")
     elif action_choice=='drop':
@@ -92,14 +107,13 @@ def inventory_player():
                     if  item_choice==0 or item_choice>len(player['inventory']):
                         print('You chose to stop dropping items.')
                         break
-                    if 1 <= item_choice <= len(items):
-                        dropped_item = player['inventory'].pop(item_choice - 1)
+                    
+                    dropped_item = player['inventory'].pop(item_choice - 1)
                         
-                        room['items'].append(dropped_item)  # Add dropped item back to the room
-                        player['Dropped_inventory'].append(dropped_item) 
-                        print(f'You have dropped: {dropped_item}')
-                    else:
-                        print('invalid choice')
+                    room['items'].append(dropped_item)  # Add dropped item back to the room
+                    player['Dropped_inventory'].append(dropped_item) 
+                    print(f'You have dropped: {dropped_item}')
+            
                 except ValueError:
                     print("Please enter a valid number.") 
     else:
@@ -112,8 +126,46 @@ def show_inventory():
         print("Your inventory:")
         for i, item in enumerate(player['inventory'], start=1):
             print(f'{i}. {item}')
+            
+            
+def save_game(filename='savefile.json'):
+    game_state = {
+        'current_room': current_room,
+        'inventory': player['inventory'],
+        'score': player['score'],
+    }
+    try:
+        with open(filename, 'w') as file:
+            json.dump(game_state, file)
+        print(f'Game saved successfully to {filename}.')
+    except Exception as e:
+        print(f"An error occurred while saving the game: {e}")
+        
+        
+
+def load_game(filename='savefile.json'):
+    global current_room, player
+    
+    try:
+        with open(filename, 'r') as file:
+            game_state = json.load(file)
+            current_room = game_state['current_room']
+            player['inventory'] = game_state['inventory']
+            player['score'] = game_state['score']
+        print(f'Game loaded successfully from {filename}.')
+        print(f'You are currently in {current_room}.')
+    except FileNotFoundError:
+        print(f'No save file found with the name {filename}. Start a new game or try a different file.')
+    except Exception as e:
+        print(f"An error occurred while loading the game: {e}")
+
+
+            
+            
+
+
 while True:
-    command = input('Enter a command ("inventory", "exit","direction"): ').lower()
+    command = input('Enter a command ("inventory", "exit","direction","examine","save","load"): ').lower()
     
     if command == 'inventory':
         show_inventory()  # Call function to manage inventory (take/drop items)
@@ -122,7 +174,14 @@ while True:
         break
     elif command == 'direction':
         direction()
+    elif command=='examine':
+        puzzel.examine()
+    elif command=='save':
+        save_game()
+    elif command=='load':
+        load_game()
+        
+    
        
-            # Call direction function to navigate the map
     else:
         print("Invalid command. Try 'inventory' or 'exit'or 'direction.")
