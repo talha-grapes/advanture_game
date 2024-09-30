@@ -1,11 +1,16 @@
 from map import game_map
 
+
+
+
 # List to hold solved puzzles
 solved_puzzel = []
 
-def solve_locked(current_room):
-    current_puzzel = game_map[current_room].get('puzzel')
 
+def solve_locked(current_room,player):
+    
+    current_puzzel = game_map[current_room].get('puzzel')
+    
     if current_puzzel is None:
         print('There is no puzzle here.')
         return False
@@ -23,12 +28,16 @@ def solve_locked(current_room):
                 return True
             else:
                 print('Incorrect answer! Try again.')
+                player['score'] -= 1  # Decrease score by 1 for incorrect answer
+                print(f"Your score is now: {player['score']}")
+                
+                
     else:
         print('There is no locked puzzle here.')
         return False
 
 
-def solve_riddle(current_room):
+def solve_riddle(current_room,player):
     current_puzzel = game_map[current_room].get('puzzel', None)
     
     if current_puzzel is None:
@@ -48,6 +57,9 @@ def solve_riddle(current_room):
                 return True
             else:
                 print('Incorrect answer! Try again.')
+                player['score'] -= 1  # Decrease score by 1 for incorrect answer
+                print(f"Your score is now: {player['score']}")
+                
     else:
         print('There is no riddle puzzle here.')
         return False

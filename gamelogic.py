@@ -29,10 +29,10 @@ def direction():
                 if game_map[next_room].get('puzzel'):
                     if game_map[next_room]['puzzel']=='locked door':
                         print(f'the door to {next_room} is locked . Solve the Puzzel')
-                        puzzel_solved=puzzel.solve_locked(next_room)
+                        puzzel_solved=puzzel.solve_locked(next_room,player)
                     if game_map[next_room]['puzzel']=='riddle':
                          print(f'the door to {next_room} is locked . Solve the Puzzel')
-                         puzzel_solved=puzzel.solve_riddle(next_room)
+                         puzzel_solved=puzzel.solve_riddle(next_room,player)
                         
                 if puzzel_solved:
                     current_room=next_room
@@ -40,6 +40,7 @@ def direction():
                     print(f'Description of {current_room}: {room["Discription"]}')
                     player['score']+=10
                     print(f'player score is {player["score"]}')
+                
              # Ask if the player wants to manage inventory after movement
                 manage_inventory = input("Do you want to manage your inventory? (yes/no): ").lower()
                 if manage_inventory == 'yes':
