@@ -12,6 +12,7 @@ def direction():
         room = game_map[current_room] 
         print(f'Description of {current_room}: {room["Discription"]}')
         direction_input=input('enter the direction (e.g:go north) ): ' )
+        
         if direction_input=='look':
             print(f'Description of {current_room}: {room["Discription"]}')
         elif direction_input =='exit':
@@ -101,6 +102,7 @@ def inventory_player():
             print('Our inventory')
             for i, item in enumerate(player['inventory'],start=1):
                 print(f'{i}. {item}')
+                print("Grapes are Everything in this world just keep this in your mind.")
             while True:
                 try:
             
@@ -144,9 +146,7 @@ def save_game(filename='savefile.json'):
         
         
 
-def load_game(filename='savefile.json'):
-    global current_room, player
-    
+def load_game(filename='savefile.json'):   
     try:
         with open(filename, 'r') as file:
             game_state = json.load(file)
