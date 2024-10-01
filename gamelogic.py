@@ -15,6 +15,7 @@ def direction():
         
         if direction_input=='look':
             print(f'Description of {current_room}: {room["Discription"]}')
+            return
         elif direction_input =='exit':
             print('Exit the game.GoodBye!')
             break
@@ -52,11 +53,6 @@ def direction():
             print('invalid comand')
         
     show_inventory() 
-    
-           
-    
-  
-  
   
   
 player={
@@ -145,7 +141,6 @@ def save_game(filename='savefile.json'):
         print(f"An error occurred while saving the game: {e}")
         
         
-
 def load_game(filename='savefile.json'):   
     try:
         with open(filename, 'r') as file:
@@ -160,9 +155,6 @@ def load_game(filename='savefile.json'):
     except Exception as e:
         print(f"An error occurred while loading the game: {e}")
 
-
-            
-            
 
 
 while True:

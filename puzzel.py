@@ -68,7 +68,7 @@ def solve_riddle(current_room,player):
 def examine():
     """Function to examine an object in the room."""
     print('What would you like to examine? ')  # Adjust based on your room's items
-    choice = input("Enter your choice: ").strip().lower()
+    choice = input("Enter your choice: ").lower()
     if choice == 'table':
         print("The table is covered with dust and a key is hidden beneath it.")
         return 'key'  # This could be an item you add to the player's inventory
